@@ -1,0 +1,48 @@
+{
+  "clientes": [
+    {
+      "id": 1,
+      "nome": "Giuliano Rosa da Silva",
+      "endereco": "Avenida T-63 nr 1440",
+      "bairro": "Jardim America"
+    },
+    {
+      "id": 2,
+      "nome": "Giuliano",
+      "endereco": "Avenida T-63 nr 1440",
+      "bairro": "Jardim America"
+    }
+  ],
+  "tipoTelefone": [
+    {
+      "id": 1,
+      "nome": "celular"
+    },
+    {
+      "id": 2,
+      "nome": "fixo"
+    }
+  ],
+  "telefones": [
+    {
+      "id": 1,
+      "numero": "62982465223",
+      "clienteId": 1
+    },
+    {
+      "id": 2,
+      "numero": "6235937288",
+      "clienteId": 1
+    },
+    {
+      "id": 3,
+      "numero": "62982465223",
+      "clienteId": 2
+    },
+    {
+      "id": 4,
+      "numero": "6235937288",
+      "clienteId": 2
+    }
+  ]
+}

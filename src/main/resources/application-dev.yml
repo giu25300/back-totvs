@@ -1,0 +1,22 @@
+server:
+  address: @server.address@
+  port: @server.port@
+  error:
+    include-message: always
+    include-binding-errors: always
+    include-stacktrace: ON_PARAM
+    include-exception: false
+json:
+  url:
+    base: @json.url.base@
+project:
+  artifactId: @project.artifactId@
+  name: @project.name@
+  version: @project.version@
+  description: @project.description@
+  #origin: "http://localhost:4200"
+  #enable-https: true
+management:
+  health:
+    mail:
+      enabled: false

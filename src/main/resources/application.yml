@@ -1,0 +1,17 @@
+spring:
+  profiles:
+    active: @spring.profiles.active@
+server:
+  servlet:
+    context-path: /back-totvs
+    session:
+      cookie:
+        name: UISESSION
+  output:
+    ansi:
+      enabled: always
+project:
+  artifactId: @project.artifactId@
+  name: @project.name@
+  version: @project.version@
+  description: @project.description@
