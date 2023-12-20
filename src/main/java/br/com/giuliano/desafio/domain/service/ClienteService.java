@@ -33,12 +33,25 @@ public class ClienteService extends BaseService<ClienteDTO,Cliente> {
         this.url = String.format("%s/clientes", this.baseUrl);
     }
 
+    /***
+     * Efetua uma busca pelo id do cliente
+     * @param id
+     * @return Cliente
+     * @throws JsonProcessingException
+     */
     public ClienteDTO buscarPeloId(Long id) throws JsonProcessingException {
         ResponseEntity<String> response = restTemplate.getForEntity(String.format("%s/%d", this.url, id), String.class);
         Cliente cliente = this.objectMapper.readValue(response.getBody(), Cliente.class);
         return this.mapToDTO(cliente,this.getDTOClass());
     }
 
+    /***
+     * Insere um cliente na base
+     * @param cliente
+     * @param listaTelefones
+     * @return Registro inserido com seu respectivo ID
+     * @throws JsonProcessingException
+     */
     public ClienteDTO inserir(ClienteDTO cliente, List<TelefoneDTO> listaTelefones) throws JsonProcessingException {
         Cliente auxCliente = this.mapFromDTO(cliente,Cliente.class);
         validaInsercao(cliente,listaTelefones);
@@ -48,6 +61,12 @@ public class ClienteService extends BaseService<ClienteDTO,Cliente> {
         return this.mapToDTO(out,this.getDTOClass());
     }
 
+    /***
+     * Efetua busca exata pelo nome
+     * @param nome
+     * @return Registro encontrado com o nome passado
+     * @throws JsonProcessingException
+     */
     public ClienteDTO buscarPeloNome(String nome) throws JsonProcessingException {
         ResponseEntity<String> response = restTemplate.getForEntity(String.format("%s?nome=%s", this.url, nome), String.class);
         final List<Cliente> asList = this.objectMapper.readValue(response.getBody(), new TypeReference<List<Cliente>>() {
@@ -55,12 +74,26 @@ public class ClienteService extends BaseService<ClienteDTO,Cliente> {
         return this.mapToDTO(asList.get(0),this.getDTOClass());
     }
 
+    /***
+     * Efetua uma busca aproximada pelo nome
+     * @param nome
+     * @return Lista de Clientes que tem o nome aproximodo (operador like)
+     * @throws JsonProcessingException
+     */
     public List<Cliente> buscarAproximadoPeloNome(String nome) throws JsonProcessingException {
         ResponseEntity<String> response = restTemplate.getForEntity(String.format("%s?nome_like=%s", this.url, nome), String.class);
         final List<Cliente> listaCliente = this.objectMapper.readValue(response.getBody(), new TypeReference<List<Cliente>>() {
         });
         return listaCliente;
     }
+
+    /***
+     * Valida se os dados são validos
+     * @param cliente
+     * @param listaTelefones
+     * @return true ou exception 400
+     * @throws JsonProcessingException
+     */
     private boolean validaInsercao(ClienteDTO cliente, List<TelefoneDTO> listaTelefones) throws JsonProcessingException {
         ClienteDTO auxCliente = this.buscarPeloNome(cliente.getNome());
         if (!Objects.isNull(auxCliente)){

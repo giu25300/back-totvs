@@ -45,6 +45,11 @@ public class TelefoneService extends BaseService<TelefoneDTO,Telefone> {
         return this.mapAllToDTO(asList,this.getDTOClass());
     }
 
+    /***
+     * Valida se um telefone é válido
+     * @param telefone
+     * @return true ou exception 400
+     */
     private boolean valida(Telefone telefone){
         if (telefone.getNumero().isEmpty()){
             //telefone não pode ser nulo
@@ -53,6 +58,13 @@ public class TelefoneService extends BaseService<TelefoneDTO,Telefone> {
         return true;
     }
 
+    /***
+     * Insere uma lista de telefones de clientes na base
+     * @param listaTelefones
+     * @param clienteId
+     * @return Lista de telefones inseridos com o respectivo ID
+     * @throws JsonProcessingException
+     */
     public List<TelefoneDTO> inserir(List<TelefoneDTO> listaTelefones, Integer clienteId) throws JsonProcessingException {
         List<TelefoneDTO> saida= new ArrayList<>();
 
